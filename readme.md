@@ -24,6 +24,7 @@ erDiagram
     dim_apps ||--|{ fact_subscription_events : "has"
     dim_subscriptions ||--|{ fact_subscription_events : "sold in"
     dim_subscribers ||--|{ fact_subscription_events : "generates"
+    dim_currency ||--|{ fact_subscription_events : "converts"
 
     dim_apps {
         INT64 app_apple_id PK
@@ -41,11 +42,17 @@ erDiagram
         STRING subscriber_id_reset
     }
 
+    dim_currency {
+        STRING currency_code PK
+        FLOAT64 rate_to_usd
+    }
+
     fact_subscription_events {
         DATE event_date
         INT64 app_apple_id FK
         INT64 subscription_apple_id FK
         INT64 subscriber_id FK
+        STRING proceeds_currency FK
         FLOAT64 developer_proceeds
         STRING introductory_price_type
         STRING refund
