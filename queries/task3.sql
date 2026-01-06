@@ -9,7 +9,7 @@ SELECT
   CAST(REGEXP_EXTRACT(subscription_duration, r'(\d+)') AS INT64) *
   CASE 
     WHEN subscription_duration LIKE '%Year%' THEN 365
-    WHEN subscription_duration LIKE '%Month%' THEN 30
+    WHEN subscription_duration LIKE '%Mont%' THEN 30
     WHEN subscription_duration LIKE '%Week%' THEN 7 
     WHEN subscription_duration LIKE '%Day%' THEN 1
     ELSE 0 
@@ -94,5 +94,6 @@ select
       (select count(*) from trial_cohort)
     ) * 100, 2
   ) as conversion_rate_percent
+
 
 
